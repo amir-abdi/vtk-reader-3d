@@ -6,10 +6,10 @@ from vtk.util import numpy_support as VN
 import matplotlib.pyplot as plt
 
 
-def get_slice(data, angle_x, angle_y, angle_z, slice_displacement, slice_dim, reshape=False):
+def get_slice(data, angle_x, angle_y, angle_z, displacement, slice_dim, reshape=False):
     '''
     :param data: data to rotate and get a slice from
-    :param slice_displacement: value between -1 and +1 to indicate the slice shift in X dimension
+    :param displacement: value between -1 and +1 to indicate the slice shift in the slice_dim
     :param angle_x: rotation around x axis
     :param angle_y: rotation around y axis
     :param angle_z: rotation around z axis
@@ -23,7 +23,7 @@ def get_slice(data, angle_x, angle_y, angle_z, slice_displacement, slice_dim, re
     dim = slice_dim
     dist = max(0,
                min(rot_vol.shape[dim] - 1,
-                   round(rot_vol.shape[dim] / 2 + slice_displacement / 2 * rot_vol.shape[dim])
+                   round(rot_vol.shape[dim] / 2 + displacement / 2 * rot_vol.shape[dim])
                    ))
 
     if dim == 0:
@@ -54,7 +54,7 @@ def read_vtk(filename):
 
 if __name__ == "__main__":
     im = read_vtk('VTK04.vtk')
-    slice = get_slice(im, 30, 20, 0, 0, 0)
+    slice = get_slice(im, angle_x=0, angle_y=90, angle_z=0, slice_dim=0, displacement=0)
 
     plt.imshow(slice)
     plt.show()
