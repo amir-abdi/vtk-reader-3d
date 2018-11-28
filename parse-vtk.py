@@ -1,8 +1,6 @@
-import math
 from scipy.ndimage import interpolation
 import numpy as np
 from vtk import vtkStructuredPointsReader
-from vtk.util import numpy_support as VN
 import matplotlib.pyplot as plt
 
 
